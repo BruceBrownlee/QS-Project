@@ -213,4 +213,6 @@ credentials.yml
 Clinic-05/data/
 /data/
 Clinic-06/mlruns/
-mlruns/
+mlruns/.idea/
+*.pyc
+data/
