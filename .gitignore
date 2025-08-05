@@ -216,3 +216,6 @@ Clinic-06/mlruns/
 mlruns/.idea/
 *.pyc
 data/
+
+# IntelliJ Stuff
+.idea/

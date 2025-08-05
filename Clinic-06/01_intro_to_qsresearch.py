@@ -37,7 +37,6 @@ TODAY = "2025-07-31"
 # * 1.0 RECAP:
 
 # 1. We have already set up the QSConnect environment and connected to the database in the previous clinic and we have created a Zipline bundle from the price data called `qspro_historical_prices_fmp` (Clinic #5).
-
 # 2. You learned how to backtest a strategy with Zipline in Clinic #2. (Ref. 02_momentum_omega.ipynb)
 
 # 3. The QSResearch library builds on top of Zipline for much faster algorithmic trading strategy research and development: https://github.com/quant-science/QSResearch/tree/master/qsresearch
@@ -46,14 +45,12 @@ TODAY = "2025-07-31"
 # * 2.0 QSRESEARCH ----
 
 # * How it works:
-
 # - QSResearch provides a structured way to define and run quantitative research projects.
 # - It includes modules for data preprocessing, feature engineering, backtesting, and performance analysis.
 # - And, most importantly, it provides an easy way to go from experiment design to backtesting and performance analysis that follows a 100% reproducible data science workflow.
 
 # %%
 # * Example of a typical algo trading development workflow:
-
 # 1. Extract Zipline Data from Zipline Bundle:
 #    - The `get_zipline_history` function retrieves historical price data from the Zipline bundle.
 #    - This data can be used for testing your functions.
@@ -166,7 +163,7 @@ CONFIG = {
     # MLFlow Tracking
     "use_mlflow": True,
     "mlflow_experiment_name": "Test Strategies",
-    "mlflow_run_name": "Test Strategy 1",
+    "mlflow_run_name": "Test Strategy 2",
     "mlflow_tags": {
         "strategy": "test", "portfolio": "equal_weight"
     },
