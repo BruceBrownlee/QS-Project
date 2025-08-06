@@ -213,11 +213,6 @@ credentials.yml
 Clinic-05/data/
 /data/
 Clinic-06/mlruns/
-mlruns/.idea/
+mlruns/
 *.pyc
 data/
-
-# IntelliJ Stuff
-.idea/
-.idea/QS-Project.iml
-.vscode/
