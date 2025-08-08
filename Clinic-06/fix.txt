@@ -1,0 +1,19 @@
+Encountering this. mlflow is capturing all my experiments OK but can't show results in the UI. which shows "Can't load run details - Float cannot represent non-numeric value: inf"
+
+- performance_df values look good, nothing out of range.
+- The artifacts like tear sheets look OK.
+- portfolio_stats.csv show monthly_sortino as inf and rf as 0.0
+- downloaded mlflow runs.csv has good values for all columns except inf for monthly sortino and porfolio sortino
+
+Just checking to see if anyone has encountered this.
+
+
+yearly_sortino inf causes MlFlow to bail on showing experiment results. Had to go into mlflow data directory, find metadata for specific run and fix value manually.
+
+[for future reference]
+Steps to fix:
+open up portfolio_stats.csv in artefacts directory
+find which metric has inf value. replace with appropriate value
+now go to runs directory and file separate file for same metric and replace inf as in previous step
+
+dont forget, this particular run is compromised in terms of data. 

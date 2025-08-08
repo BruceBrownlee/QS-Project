@@ -62,7 +62,7 @@ from qsresearch.utils.zipline import get_zipline_history
 
 df = get_zipline_history(
     bundle_name="qspro_demo_historical_prices_fmp",
-    symbols=["AAPL", "APP", "RKLB", "AMZN","PLTR"], # This is a small universe for testing
+    symbols=["AAPL", "AMZN","PLTR"], # This is a small universe for testing
     end_date=TODAY,
     bar_count=252*3,  # 3 years of daily data
     frequency="1d"
@@ -161,9 +161,29 @@ PREDICTOR_COLS = ["close_fastqsmom_21_252_126"]
 CONFIG = {
     
     # MLFlow Tracking
+    # Must include:
+    # start_date: Start date of the backtest (pd.Timestamp).
+    # end_date: End date of the backtest (pd.Timestamp).
+    # capital_base: Initial capital for the backtest (float).
+    # bundle_name: Name of the Zipline data bundle (str).
+    
+    # Optional keys:
+    # calendar_name: Trading calendar name (default: 'NYSE').
+    # custom_handle_data: Custom handle_data function (default: default_handle_data).
+    # mlflow_tracking_uri:  MLflow tracking server URI (e.g., 'http://mlflow-server:5000').
+    #                       An empty string, or a local file path, prefixed with file:/ 
+    #                       Data is stored locally at the provided file (or ./mlruns if empty)
+    #                       Can be an HTTP URI like https://my-tracking-server:5000 (or :8301)
+    # mlflow_tracking_port: MLflow tracking server port (default: None) - don't use both port and URI.
+    # mlflow_artifact_root: Artifact storage location (e.g., 's3://my-bucket/mlflow/artifacts').
+    # mlflow_nested_run: Whether to create a nested run (default: False).
+    # mlflow_log_metrics_frequency: Frequency for logging metrics (e.g., 'daily', default: None).
+    # mlflow_artifact_subdir: Subdirectory for artifacts (e.g., 'momentum_backtest'). """
+    
     "use_mlflow": True,
+    "mlflow_tracking_uri": "/Users/brucebrownlee/dev/github/Resident/QS-Project/Clinic-06/mlruns",  # Local file storage for testing
     "mlflow_experiment_name": "Test Strategies",
-    "mlflow_run_name": "Test Strategy 2",
+    "mlflow_run_name": "Test Strategy 5",
     "mlflow_tags": {
         "strategy": "test", "portfolio": "equal_weight"
     },
@@ -283,9 +303,14 @@ performance_df.glimpse()
 
 # Run in terminal:
 #   mlflow server
+# Use: mlflow server --port 8031 --backend-store-uri ~/dev/github/Resident/QS-Project/Clinic-06/mlruns 
 
 # * NEXT STEPS:
 
 # - Knowledge Check: Try adding a new function that adds a custom feature to the dataset.
 
 # - Now you know how it works, we'll examine the QS Momentum Factor strategy.
+# %%
+performance_df
+
+# %%
