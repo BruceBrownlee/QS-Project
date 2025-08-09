@@ -96,7 +96,27 @@ def add_qsmom_features(
 CONFIG = {
     
     # MLFlow Tracking
+    # Must include:
+    # start_date: Start date of the backtest (pd.Timestamp).
+    # end_date: End date of the backtest (pd.Timestamp).
+    # capital_base: Initial capital for the backtest (float).
+    # bundle_name: Name of the Zipline data bundle (str).
+    
+    # Optional keys:
+    # calendar_name: Trading calendar name (default: 'NYSE').
+    # custom_handle_data: Custom handle_data function (default: default_handle_data).
+    # mlflow_tracking_uri:  MLflow tracking server URI (e.g., 'http://mlflow-server:5000').
+    #                       An empty string, or a local file path, prefixed with file:/ 
+    #                       Data is stored locally at the provided file (or ./mlruns if empty)
+    #                       Can be an HTTP URI like https://my-tracking-server:5000 (or :8301)
+    # mlflow_tracking_port: MLflow tracking server port (default: None) - don't use both port and URI.
+    # mlflow_artifact_root: Artifact storage location (e.g., 's3://my-bucket/mlflow/artifacts').
+    # mlflow_nested_run: Whether to create a nested run (default: False).
+    # mlflow_log_metrics_frequency: Frequency for logging metrics (e.g., 'daily', default: None).
+    # mlflow_artifact_subdir: Subdirectory for artifacts (e.g., 'momentum_backtest'). """
+    
     "use_mlflow": True,
+    "mlflow_tracking_uri": "/Users/brucebrownlee/dev/github/Resident/QS-Project/Clinic-06/mlruns",  # Local file storage for testing
     "mlflow_experiment_name": "Momentum Factor Strategy",
     "mlflow_run_name": "qsmom equal weight: long only, volume_top_n=500, no stop loss, 1.5 year",
     "mlflow_tags": {"strategy": "simple_momentum", "portfolio": "equal_weight"},
