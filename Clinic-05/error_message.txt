@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+File /opt/anaconda3/envs/quant-stack/lib/python3.11/urllib/request.py:1505, in FileHandler.open_local_file(self, req)
+   1504 try:
+-> 1505     stats = os.stat(localfile)
+   1506     size = stats.st_size
+
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/mdancho/Desktop/course_code/QS02-Quant_Scientist_Algo_Trading_System/mlruns/331281106765637158/f5c0461cd4244801a5554ea4af38f721/artifacts/performance.pkl'
+
+During handling of the above exception, another exception occurred:
+
+URLError                                  Traceback (most recent call last)
+Cell In[13], line 52
+     48 PATH_TO_PERFORMANCE = "file:///Users/mdancho/Desktop/course_code/QS02-Quant_Scientist_Algo_Trading_System/mlruns/331281106765637158/f5c0461cd4244801a5554ea4af38f721/artifacts/performance.pkl"
+     51 # Load the performance data (this is the *exact* same zipline output from Clinic 2)
+---> 52 performance_df = pd.read_pickle(PATH_TO_PERFORMANCE)
+     53 performance_df
+     55 performance_df.glimpse()
+
+File /opt/anaconda3/envs/quant-stack/lib/python3.11/site-packages/pandas/io/pickle.py:185, in read_pickle(filepath_or_buffer, compression, storage_options)
+    123 """
+    124 Load pickled pandas object (or any object) from file.
+    125 
+   (...)    182 4    4    9
+    183 """
+...
+   1521 except OSError as exp:
+-> 1522     raise URLError(exp)
+   1523 raise URLError('file not on local host')
+
+URLError: <urlopen error [Errno 2] No such file or directory: '/Users/mdancho/Desktop/course_code/QS02-Quant_Scientist_Algo_Trading_System/mlruns/331281106765637158/f5c0461cd4244801a5554ea4af38f721/artifacts/performance.pkl'>
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...

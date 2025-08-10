@@ -13,22 +13,27 @@
 
 # * LIBRARIES ----
 
+# %%
 # Data Analysis
 import logging
 import pandas as pd
 import pytimetk as tk
 
+# %%
 # Zipline Helpers
 from zipline.api import date_rules, time_rules
 
+# %%
 # QSResearch - Preprocessing
 from qsresearch.preprocessors import preprocess_price_data, universe_screener
 
+# %%
 # QSResearch - Factor Strategies
 from qsresearch.strategies.factor import run_backtest
 from qsresearch.strategies.factor.algorithms import use_factor_as_signal
 from qsresearch.strategies.factor.portfolio_construction import long_short_equal_weight_portfolio
 
+# %%
 # QS Research - Performance Analysis
 from qsresearch.portfolio_analysis.returns import create_full_returns_tearsheet_from_zipline
 
@@ -36,6 +41,7 @@ from qsresearch.portfolio_analysis.factor import create_full_alpha_factor_tearsh
 
 # * ENVIRONMENT VARIABLES ----
 
+# %%
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
@@ -47,12 +53,14 @@ PREDICTOR_COLS = [
 
 # * CUSTOM FUNCTIONS ----
 
+# %%
 # Data Printer Function
 def data_printer(data, label="Processed Data"):
     print(f"\n{label}:\n")
     tk.glimpse(data.tail())
     return data
 
+# %%
 # Add QS Momentum Feature 
 def add_qsmom_features(
     data,
@@ -90,6 +98,7 @@ def add_qsmom_features(
 
 # * 1.0 TRADING STRATEGY CONFIGURATION ----
 
+# %%
 # Run Backtest Using Configurations:
 # https://github.com/quant-science/QSResearch/blob/master/qsresearch/strategies/factor/run_backtest.py
 
@@ -125,7 +134,7 @@ CONFIG = {
     "start_date": pd.Timestamp("2024-01-01"),
     "end_date": pd.Timestamp("2025-07-01"),
     "capital_base": 1_000_000,
-    "bundle_name": "qspro_historical_prices_fmp",
+    "bundle_name": "qspro_demo_historical_prices_fmp",
     "benchmark_symbol": "SPY",  # Set to None to skip benchmark
     "window_length": 252 * 3,  # zipline bar count window for training and prediction
     "frequency": "1d",
@@ -235,6 +244,7 @@ CONFIG = {
     },
 }
 
+# %%
 results = run_backtest(CONFIG)
 
 # * 2.0 MLFLOW TRACKING ----
@@ -281,13 +291,19 @@ results = run_backtest(CONFIG)
 # * 5.0 GETTING THE STRATEGY ZIPLINE PERFORMACE DATA:
 
 # * GET THIS PATH FROM THE MLFlow UI > Artifacts > performance.pkl:
-PATH_TO_PERFORMANCE = "file:///Users/mdancho/Desktop/course_code/QS02-Quant_Scientist_Algo_Trading_System/mlruns/331281106765637158/f5c0461cd4244801a5554ea4af38f721/artifacts/performance.pkl"
+# Bruce runs:
+# mlflow server --port 8031 --backend-store-uri ~/dev/github/resident/qs-project/clinic-06/mlruns
 
+
+# PATH_TO_PERFORMANCE = "file:///Users/mdancho/Desktop/course_code/QS02-Quant_Scientist_Algo_Trading_System/mlruns/331281106765637158/f5c0461cd4244801a5554ea4af38f721/artifacts/performance.pkl"
+PATH_TO_PERFORMANCE = "file:////Users/brucebrownlee/dev/github/Resident/QS-Project/Clinic-06/mlruns/800697722943579440/442fb2a3f46e455e9a3b9b0653f0dcb5/artifacts/performance.pkl"
 
 # Load the performance data (this is the *exact* same zipline output from Clinic 2)
+import pandas as pd
 performance_df = pd.read_pickle(PATH_TO_PERFORMANCE)
 performance_df
 
+import pytimetk as tk
 performance_df.glimpse()
 
 # * Returns Analysis ----
@@ -370,3 +386,5 @@ app.disconnect()
 # 1. We will implement a **multi-factor model** using the QSResearch library WITH MACHINE LEARNING.
 # 2. We will use the QSConnect library to fetch Fundamental data and build a Momentum + Fundamental Factor Strategy.
 # 3. We will leverage FMP Fundamental data to enhance our trading strategies.
+
+# %%
